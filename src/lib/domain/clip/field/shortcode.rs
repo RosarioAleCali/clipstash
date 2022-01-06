@@ -1,10 +1,10 @@
-use super::ClipError;
+use crate::domain::clip::ClipError;
 use derive_more::From;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
 #[derive(Clone, Debug, Deserialize, Serialize, From)]
-pub struct ShortCode(Option<String>);
+pub struct ShortCode(String);
 
 impl ShortCode {
   pub fn new() -> Self {
@@ -14,7 +14,7 @@ impl ShortCode {
 
     let allowed_chars = [ 'a', 'b', 'c', 'd', '1', '2', '3', '4' ];
 
-    let shortcode = String::with_capacity(10);
+    let mut shortcode = String::with_capacity(10);
 
     for _ in 0..10 {
       shortcode.push(
@@ -25,11 +25,11 @@ impl ShortCode {
     Self(shortcode)
   }
 
-  pub fn as_str(self) -> &str {
+  pub fn as_str(&self) -> &str {
     self.0.as_str()
   }
 
-  pub fn into_inner(self) -> Option<String> {
+  pub fn into_inner(self) -> String {
     self.0
   }
 }

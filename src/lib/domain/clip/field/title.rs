@@ -1,12 +1,12 @@
-use super::ClipError;
+use crate::domain::clip::ClipError;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
-#[derive(Clone, Debug, Deserialize, Serialize]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Title(Option<String>);
 
 impl Title {
-  pub fn new<T: Into<Option<String>>>(title: T)) -> Self {
+  pub fn new<T: Into<Option<String>>>(title: T) -> Self {
     let title: Option<String> = title.into();
 
     match title {
@@ -16,12 +16,12 @@ impl Title {
         } else {
           Self(None)
         }
-        None => Self(None)
       }
+      None => Self(None)
     }
   }
 
-  pub into_inner(self) -> Option<String> {
+  pub fn into_inner(self) -> Option<String> {
     self.0
   }
 }

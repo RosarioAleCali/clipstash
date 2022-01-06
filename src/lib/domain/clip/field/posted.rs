@@ -1,4 +1,4 @@
-use crate::domain::Time;
+use crate::domain::time::Time;
 use serde::{Deserialize, Serialize};
 use derive_more::Constructor;
 
@@ -6,7 +6,7 @@ use derive_more::Constructor;
 pub struct Posted(Time);
 
 impl Posted {
-  pub into_inner(self) -> Time {
+  pub fn into_inner(self) -> Time {
     self.0
   }
 }

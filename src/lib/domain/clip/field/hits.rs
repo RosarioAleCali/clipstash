@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Hits(u64);
 
 impl Hits {
-  pub into_inner(self) -> u64 {
+  pub fn into_inner(self) -> u64 {
     self.0
   }
 }

@@ -1,4 +1,4 @@
-use derive_more::{Display, From}
+use derive_more::{Display, From};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 use std::str::FromStr;
@@ -22,7 +22,7 @@ impl Default for DbId {
   }
 }
 
-impl FromStr for Expires {
+impl FromStr for DbId {
   type Err = uuid::Error;
 
   fn from_str(id: &str) -> Result<Self, Self::Err> {

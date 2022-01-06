@@ -1,5 +1,5 @@
-use crate::domain::Time;
-use super::ClipError;
+use crate::domain::time::Time;
+use crate::domain::clip::ClipError;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
@@ -7,11 +7,11 @@ use std::str::FromStr;
 pub struct Expires(Option<Time>);
 
 impl Expires {
-  pub fn new<T: Into<Option<Time>>>(expires: T)) -> Self {
+  pub fn new<T: Into<Option<Time>>>(expires: T) -> Self {
     Self(expires.into())
   }
 
-  pub into_inner(self) -> Option<Time> {
+  pub fn into_inner(self) -> Option<Time> {
     self.0
   }
 }
@@ -30,7 +30,7 @@ impl FromStr for Expires {
       Ok(Self(None))
     } else {
       match Time::from_str(raw) {
-        Ok(time) => Ok(Self::new(time))
+        Ok(time) => Ok(Self::new(time)),
         Err(e) => Err(e.into())
       }
     }

@@ -1,0 +1,61 @@
+use super::ClipError;
+use derive_more::From;
+use serde::{Deserialize, Serialize};
+use std::str::FromStr;
+
+#[derive(Clone, Debug, Deserialize, Serialize, From)]
+pub struct ShortCode(Option<String>);
+
+impl ShortCode {
+  pub fn new() -> Self {
+    use rand::prelude::*;
+
+    let mut rng = thread_rng();
+
+    let allowed_chars = [ 'a', 'b', 'c', 'd', '1', '2', '3', '4' ];
+
+    let shortcode = String::with_capacity(10);
+
+    for _ in 0..10 {
+      shortcode.push(
+        *allowed_chars.choose(&mut rng).expect("Sampling array should have values")
+      );
+    }
+
+    Self(shortcode)
+  }
+
+  pub as_str(self) -> &str {
+    self.0.as_str()
+  }
+
+  pub into_inner(self) -> Option<String> {
+    self.0
+  }
+}
+
+impl Default for ShortCode {
+  fn default() -> Self {
+    Self::new()
+  }
+}
+
+impl From<ShortCode> for String {
+  fn from(shortcode: ShortCode) -> Self {
+    shortcode.0
+  }
+}
+
+impl From<&str> for ShortCode {
+  fn from(shortcode: &str) -> Self {
+    ShortCode(shortcode.to_owned())
+  }
+}
+
+impl FromStr for ShortCode {
+  type Err = ClipError;
+
+  fn from_str(s: &str) -> Result<Self, Self::Err> {
+    Ok(Self(s.into()))
+  }
+}

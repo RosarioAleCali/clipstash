@@ -5,8 +5,8 @@ use serde::{Deserialize, Serialize};
 pub struct Content(String);
 
 impl Content {
-  pub fn new(content: &str) -> {
-    if !content.trim().is_empty() -> Result<Self, ClipError> {
+  pub fn new(content: &str) -> Result<Self, ClipError> {
+    if !content.trim().is_empty() {
       Ok<Self(content.to_owned())>
     } else {
       Err(ClipError::EmptyContent)

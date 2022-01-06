@@ -25,11 +25,11 @@ impl ShortCode {
     Self(shortcode)
   }
 
-  pub as_str(self) -> &str {
+  pub fn as_str(self) -> &str {
     self.0.as_str()
   }
 
-  pub into_inner(self) -> Option<String> {
+  pub fn into_inner(self) -> Option<String> {
     self.0
   }
 }

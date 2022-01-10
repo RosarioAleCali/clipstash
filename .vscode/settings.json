@@ -7,6 +7,7 @@
     "clipstash",
     "datetime",
     "dotenv",
+    "hitcounter",
     "shortcode",
     "sqlx",
     "structopt",
